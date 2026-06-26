@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex flex-col justify-center  bg-white mx-auto w-80 my-32 shadow-lg rounded-xl">
+        <h1 class="text-2xl text-gray-800 py-8 self-start px-8 font-bold">To Do list</h1>
+        <div class="flex w-full gap-2 pb-8 px-8">
+
+            <input id="input" type="text"
+                class=" flex-1 border border-gray-200 p-2 focus:outline-none focus:border-blue-500 text-sm rounded-xl"
+                placeholder="Ajouter une tache">
+            <button id="btna"
+                class="bg-blue-500 text-white text-sm px-4 transition hover:bg-blue-700 rounded-lg py-2 ">Ajouter
+            </button>
+
+        </div>
+        <ul id="liste" class="flex flex-col gap-2 mb-6"></ul>
+    </div>
+
+    <script>
+        let input = document.querySelector("#input");
+        let btn = document.querySelector("#btn");
+        let liste = document.querySelector("#liste");
+
+        btn.addEventListener("click", () => {
+            if (input.value === "") return
+
+            let li = document.createElement("li");
+            li.className = "flex justify-between items-center bg-gray-100 text-sm p-2 mx-4  rounded-xl border border-gray-200 "
+            li.textContent = input.value;
+
+            let btnsupp = document.createElement("button");
+            btnsupp.textContent = "✕";
+            btnsupp.className = "text-red-400 hover:text-red-600 font-bold "
+            btnsupp.addEventListener("click", () => {
+                li.remove();
+            });
+
+            li.appendChild(btnsupp);
+            liste.appendChild(li);
+            input.value = "";
+
+
+        });
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") btn.click();
+        });
+
+    </script>
+</body>
+
+</html>
